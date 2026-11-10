@@ -213,3 +213,27 @@ input,textarea,select{max-width:100%}
 .practice-feedback{border-left:3px solid var(--ac);padding:12px 16px;margin:18px 0;background:rgba(66,245,197,.07);border-radius:0 10px 10px 0}
 .practice-feedback p{line-height:1.6}
 @media(max-width:600px){.practice-panel,.practice-cta,.practice-intro{padding:15px}.practice-telemetry{padding:12px}.practice-telemetry>div{font-size:9px}}
+
+/* Live incident simulation — responsive, browser-only defender controls */
+#oj-live-sim{scroll-margin-top:80px}
+.oj-live{border:1px solid #397c7d;border-radius:18px;background:linear-gradient(135deg,#0c2030,#11172e);padding:22px;margin:20px 0 30px;color:#e4f4fa;box-shadow:0 20px 70px #0004}
+.oj-live-top{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.oj-live-top h2{color:#f0fbff;margin:5px 0}
+.oj-live-status{font:700 11px monospace;color:#5ff5cc;letter-spacing:.09em;border:1px solid #397c7d;padding:10px;border-radius:8px}
+.oj-live-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:20px 0}
+.oj-live-metrics>div{background:#091a29;border:1px solid #2b5265;padding:15px;border-radius:10px}
+.oj-live-metrics small{display:block;font:700 10px monospace;color:#93b5c8;letter-spacing:.08em}
+.oj-live-metrics strong{font:800 27px/1.6 monospace;color:#62f1c9}
+.oj-live-layout{display:grid;grid-template-columns:1.2fr 1fr;gap:15px}
+.oj-live-feed,.oj-live-defend{background:#081727;border:1px solid #2a455d;border-radius:12px;padding:17px;min-width:0}
+.oj-live-feed h3,.oj-live-defend h3{color:#e4f4fa;margin:0 0 10px}
+.oj-live-feed h3 span{font:700 10px monospace;color:#5ff5cc}
+#oj-events{max-height:360px;overflow:auto;display:flex;flex-direction:column;gap:8px}
+.oj-event{padding:11px 12px;background:#11283b;border-left:3px solid #e4a66f;border-radius:6px;overflow-wrap:anywhere}
+.oj-event.ok{border-color:#5ff5cc}.oj-event.high{border-color:#ff7676}
+.oj-event small{font:700 10px monospace;color:#c7b6fc}
+.oj-event p{margin:6px 0 0;font-size:12px;line-height:1.55;color:#d7e5ed}
+.oj-live-actions{display:flex;gap:9px;flex-wrap:wrap;margin:16px 0}
+.oj-live-actions button{min-height:40px;white-space:normal}
+#oj-outcome{min-height:28px;color:#5ff5cc;font-weight:700}
+@media(max-width:800px){.oj-live-layout{grid-template-columns:1fr}.oj-live{padding:13px}.oj-live-metrics{gap:6px}.oj-live-metrics>div{padding:9px}.oj-live-metrics strong{font-size:20px}}
