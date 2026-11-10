@@ -191,3 +191,25 @@ input,textarea,select{max-width:100%}
 .card,.card a{overflow-wrap:anywhere}
 @media(max-width:720px){#nav{padding:8px 10px;gap:5px}#nav .home{margin-right:5px;font-size:12px}#nav button{font-size:12px;padding:8px 10px}main{padding:20px 14px 90px}.grid{grid-template-columns:minmax(0,1fr)}.range-workbench{display:block}.range-tasks{margin-top:16px}}
 @media(prefers-contrast:more){.card{border-width:2px}button:focus-visible,a:focus-visible,input:focus-visible{outline-width:4px}}
+
+/* OJ practice lab — accessible simulated defence exercises */
+.practice-intro,.practice-cta,.practice-panel{border:1px solid #347d78;background:linear-gradient(130deg,rgba(17,72,76,.25),rgba(37,31,76,.2));border-radius:16px;padding:20px;margin:18px 0 26px}
+.practice-intro{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.practice-intro strong{color:var(--ac);font-size:16px}
+.practice-intro span{color:var(--mu);font-size:13px}
+.practice-cta{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.practice-cta p{margin:7px 0 0;color:var(--mu);font-size:13px}
+.practice-panel{max-width:920px;margin:20px auto 28px;scroll-margin-top:80px}
+.practice-panel h2{font-size:clamp(22px,3vw,32px)}
+.practice-eyebrow{color:var(--ac);font-size:11px;font-weight:800;letter-spacing:.15em;margin-bottom:10px}
+.practice-telemetry{background:rgba(3,13,24,.6);border:1px solid #345065;border-radius:12px;padding:16px;margin:20px 0;color:#c5d9e7}
+.practice-telemetry>div{display:flex;justify-content:space-between;gap:8px;color:#66e5c6;font:700 10px/1.4 monospace;letter-spacing:.1em}
+.practice-telemetry p{font-size:13px;line-height:1.6}
+.practice-options{display:grid;gap:10px;margin:20px 0}
+.practice-choice{display:block;width:100%;text-align:left;white-space:normal;line-height:1.55;padding:15px 18px;border:1px solid var(--bd);border-radius:11px;background:var(--sf);color:var(--tx);cursor:pointer}
+.practice-choice:not(:disabled):hover{border-color:var(--ac);background:rgba(66,245,197,.07)}
+.practice-choice.practice-correct{border-color:#42f5c5}
+.practice-choice:disabled{cursor:default;opacity:.78}
+.practice-feedback{border-left:3px solid var(--ac);padding:12px 16px;margin:18px 0;background:rgba(66,245,197,.07);border-radius:0 10px 10px 0}
+.practice-feedback p{line-height:1.6}
+@media(max-width:600px){.practice-panel,.practice-cta,.practice-intro{padding:15px}.practice-telemetry{padding:12px}.practice-telemetry>div{font-size:9px}}
