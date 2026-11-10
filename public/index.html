@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OJ // NEXUS SEC — Cybersecurity Academy</title>
+<meta name="description" content="OJ // NEXUS SEC: immersive cybersecurity education, 100 attack tutorials, 32 CTFs and nine role simulations.">
+<link rel="icon" type="image/svg+xml" href="assets/oj-mark.svg">\n<meta name="theme-color" content="#071222">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#101437;--mist:#e9ecfa;--cob:#3d5afe;--amb:#ffb020;--bg:#f5f6fd;--tx:#14173a;--mu:#555b85;--ln:#d5d9ef;--sf:#eceffb;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a0d24;--tx:#e9ecfa;--mu:#9ba1ca;--ln:#232851;--sf:#11153a;--cob:#7f93ff;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0a0d24;--tx:#e9ecfa;--mu:#9ba1ca;--ln:#232851;--sf:#11153a;--cob:#7f93ff;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:17px/1.65 "Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+h1,h2,h3,.sy{font-family:Syne,"Arial Black",system-ui,sans-serif;font-weight:800;letter-spacing:-.02em;line-height:1.05;margin:0}
+a{color:inherit}.w{max-width:1080px;margin:0 auto;padding:0 22px}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid var(--amb);outline-offset:3px}
+header.top{position:absolute;inset:env(safe-area-inset-top,0px) 0 auto;z-index:2}
+header.top .w{display:flex;justify-content:space-between;align-items:center;padding-top:22px;color:var(--mist)}
+.logo{font-family:Syne,sans-serif;font-weight:800;font-size:20px;text-decoration:none}
+.logo i{font-style:normal;color:var(--amb)}
+header.top nav a{margin-left:22px;text-decoration:none;font-size:15px;opacity:.85}header.top nav a:hover{opacity:1}
+.hero{background:var(--ink);color:var(--mist);padding:150px 0 70px;min-height:92vh;display:flex;align-items:center}
+#cipher{font-size:clamp(44px,10.5vw,118px);margin:0 0 28px;word-break:break-word;min-height:2.1em}
+#cipher span{display:inline-block;transition:color .4s}
+.solved #cipher span.l{color:var(--amb)}
+.dial{display:flex;align-items:center;gap:16px;max-width:520px;margin:0 0 20px}
+.dial label{white-space:nowrap;font-size:15px;opacity:.9}
+.dial input{flex:1;accent-color:var(--amb);height:32px}
+.dial output{font-family:Syne,sans-serif;font-weight:800;width:2ch;text-align:right}
+.lede{max-width:56ch;opacity:.85;margin:0 0 30px}
+.btn{display:inline-block;padding:13px 22px;border-radius:99px;text-decoration:none;font-weight:600;margin:0 10px 10px 0}
+.btn.p{background:var(--amb);color:var(--ink)}.btn.s{border:1.5px solid rgba(233,236,250,.5);color:var(--mist)}
+.btn:hover{transform:translateY(-2px)}.btn{transition:transform .2s}
+section{padding:84px 0}h2{font-size:clamp(32px,5vw,54px);margin-bottom:14px;max-width:16ch}
+.sub{color:var(--mu);max-width:56ch;margin:0 0 36px}
+details{border-top:1.5px solid var(--ln)}details:last-of-type{border-bottom:1.5px solid var(--ln)}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:20px 4px}
+summary::-webkit-details-marker{display:none}
+summary b{font-family:Syne,sans-serif;font-size:clamp(22px,3.4vw,34px);font-weight:800;letter-spacing:-.02em}
+summary span{color:var(--mu);font-size:15px;text-align:right}
+summary::after{content:"+";font-family:Syne,sans-serif;font-size:28px;color:var(--cob);transition:transform .25s;order:3}
+details[open] summary::after{transform:rotate(45deg)}
+.ex{padding:0 4px 24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;color:var(--mu);font-size:15.5px}
+.ex strong{display:block;color:var(--tx);font-size:14px;margin-bottom:2px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:0;border-left:1.5px solid var(--ln)}
+.steps div{padding:6px 26px 20px;border-right:1.5px solid var(--ln)}
+.steps h3{font-size:30px;margin-bottom:10px}.steps p{margin:0;color:var(--mu)}
+.band{background:var(--ink);color:var(--mist);border-radius:28px;padding:54px 40px}
+.band h2{max-width:20ch}.band p{max-width:52ch;opacity:.85;margin:0 0 26px}
+.pledge{border-left:5px solid var(--amb);padding:6px 0 6px 24px;font-family:Syne,sans-serif;font-weight:700;font-size:clamp(22px,3.2vw,34px);line-height:1.25;letter-spacing:-.01em;max-width:30ch}
+footer{border-top:1.5px solid var(--ln);padding:34px 0 50px;color:var(--mu);font-size:15px}
+footer .w{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+@media (max-width:640px){header.top nav a:not(:last-child){display:none}.band{padding:40px 24px}summary span{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+<style>
+:root{--ink:#071222;--mist:#e8f4ff;--cob:#42f5c5;--amb:#9d8cff;--bg:#080f1d;--tx:#e8f4ff;--mu:#a0b2c8;--ln:#263950;--sf:#0e1b2d;color-scheme:dark}
+body{background:#080f1d;color:var(--tx)}
+header.top .w{max-width:1180px}.logo{letter-spacing:.08em;font-size:19px}.logo i{color:var(--cob)}
+.hero{position:relative;overflow:hidden;background:radial-gradient(ellipse at 76% 35%,rgba(38,192,172,.18),transparent 34%),radial-gradient(ellipse at 20% 75%,rgba(114,91,215,.19),transparent 35%),#071222;min-height:94vh}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(91,142,176,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(91,142,176,.08) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(to bottom,black,transparent 90%)}
+.hero>.w{position:relative;z-index:1;max-width:1180px}.hero h1{font-size:clamp(52px,10vw,112px);max-width:12ch;letter-spacing:-.065em;line-height:.98}.hero h1 span,.solved #cipher span.l{color:var(--cob)}
+#cipher{color:#e8f4ff}.dial input{accent-color:var(--cob)}.dial output{color:var(--cob)}.lede{font-size:19px;max-width:54ch;color:#c2d1e3}
+.btn{border-radius:11px;font-weight:800}.btn.p{background:linear-gradient(135deg,#42f5c5,#9d8cff);color:#071222}.btn.s{border-color:#476079;color:#e8f4ff}
+section{padding:92px 0}section:nth-of-type(odd){background:#0a1526}h2{font-size:clamp(34px,5vw,58px);letter-spacing:-.05em}.sub{color:#a0b2c8;font-size:18px}
+.steps{border-color:#30435a}.steps div{border-color:#30435a}.steps h3{color:#42f5c5}.band{background:radial-gradient(circle at 90% 0%,rgba(66,245,197,.18),transparent 38%),#111f34;border:1px solid #2a425d;border-radius:24px}.pledge{border-color:#42f5c5;color:#e8f4ff}
+footer{border-color:#263950;color:#93a8c0}
+@media(max-width:640px){.hero{padding-top:130px}.hero h1{font-size:clamp(44px,14vw,70px)}}
+</style>
+<style>
+/* OJ // NEXUS SEC — 2026 visual identity */
+.logo{display:inline-flex;align-items:center;gap:11px;font-size:16px;letter-spacing:.055em}
+.oj-mark{width:38px;height:38px;filter:drop-shadow(0 0 12px rgba(66,245,197,.16))}
+.logo-slash{color:#42f5c5;margin:0 3px}.logo-sec{color:#9d8cff;margin-left:4px}
+header.top .w{max-width:1320px}
+.hero{min-height:92vh;padding:145px 0 92px}
+.hero>.w{max-width:1320px}
+.hero-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(330px,.9fr);gap:6%;align-items:center}
+.hero h1{font-size:clamp(52px,7.5vw,105px);max-width:11ch}
+.hero-eyebrow{color:#69f4d1;letter-spacing:.16em;font:700 11px/1.5 "Instrument Sans",sans-serif;margin-bottom:22px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.live-dot{width:8px;height:8px;border-radius:50%;background:#42f5c5;box-shadow:0 0 15px #42f5c5}.eyebrow-sep{color:#687c9b}
+.hero-stats{display:flex;gap:24px;flex-wrap:wrap;border-top:1px solid #28465a;margin-top:36px;padding-top:26px}
+.hero-stats div{display:flex;flex-direction:column;gap:2px}
+.hero-stats strong{font:800 34px/1 Syne,sans-serif;color:#e8f4ff}
+.hero-stats span{font:700 10px/1.5 "Instrument Sans",sans-serif;letter-spacing:.13em;color:#8ca9bb}
+.hero-console{border:1px solid #315569;border-radius:16px;overflow:hidden;background:rgba(7,19,32,.96);box-shadow:0 35px 90px #0008,0 0 70px rgba(66,245,197,.08);transform:perspective(1200px) rotateY(-3deg)}
+.console-head{display:flex;align-items:center;justify-content:space-between;gap:8px;background:#13283b;padding:15px 17px;color:#a8c6d5;font:700 10px/1.2 monospace;letter-spacing:.04em}
+.console-dots{color:#fa8f87;letter-spacing:4px}.status{color:#42f5c5}
+.console-body{padding:23px 20px 17px;font:12px/1.8 "Courier New",monospace}
+.console-mini,.console-foot{display:flex;justify-content:space-between;gap:10px;color:#87b2c5;font-size:10px;letter-spacing:.08em}
+.console-mini span{color:#42f5c5}
+.signal{display:flex;gap:7px;align-items:end;height:105px;padding:16px 0;border-bottom:1px solid #28465a;margin-bottom:19px}
+.signal-bar{flex:1;background:linear-gradient(0deg,#19a990,#55f8d0);height:30%;border-radius:3px 3px 0 0;opacity:.85}
+.signal-bar:nth-child(3n){height:72%}.signal-bar:nth-child(4n){height:42%;background:linear-gradient(0deg,#6352a7,#ad94ff)}.signal-bar:nth-child(7n){height:96%}.signal-bar:nth-child(11n){height:62%}
+.console-event{padding:7px 0;color:#b5cbd9;border-bottom:1px solid #1c3345}.event-time{color:#638ea2;margin-right:8px}.event-alert{color:#ffac85}.event-ok{color:#42f5c5}
+.console-line{margin-top:23px;color:#42f5c5}.type-cursor{color:#d8e8ef}.console-result{color:#d5a6ff;margin:6px 0 26px}
+.console-foot{border-top:1px solid #28465a;padding-top:14px;color:#6f9eb3}
+@media(max-width:930px){.hero-layout{grid-template-columns:1fr}.hero-console{max-width:620px;transform:none;margin-top:36px}.hero h1{font-size:clamp(52px,11vw,90px)}}
+@media(max-width:640px){.hero-stats{gap:17px}.hero-stats strong{font-size:27px}.hero-console{margin-top:26px}.console-body{padding:16px 13px}.console-head{font-size:9px}.console-mini span{display:none}.logo{font-size:13px}.oj-mark{width:32px;height:32px}}
+@media(prefers-reduced-motion:reduce){.hero-console{transform:none}}
+</style>
+<style>
+.skip-link{position:absolute;left:12px;top:-70px;background:#42f5c5;color:#061422;padding:10px 14px;z-index:10000;border-radius:8px}
+.skip-link:focus{top:12px}
+:where(a,button,input,select):focus-visible{outline:3px solid #bda6ff;outline-offset:4px}
+.hero-console{transition:transform .35s ease,box-shadow .35s ease}
+.hero-console:hover{transform:perspective(1200px) rotateY(0deg) translateY(-5px);box-shadow:0 40px 100px #0009,0 0 70px #42f5c520}
+@media(prefers-reduced-motion:reduce){.hero-console,.hero-console:hover{transition:none;transform:none}}
+</style>
+</head><body>
+<a class="skip-link" href="#tracks">Skip to learning information</a>
+<header class="top"><div class="w"><a class="logo" href="#top"><img class="oj-mark" src="assets/oj-mark.svg" alt="OJ logo"> <span>OJ<span class="logo-slash">//</span>NEXUS<span class="logo-sec">SEC</span></span></a><nav><a href="#tracks">Careers</a><a href="#method">Method</a><a href="academy/attacks.html">Attack library</a><a href="academy/range.html">Live range</a><a href="#academy">Academy</a></nav></div></header>
+<div class="hero" id="top"><div class="w hero-layout" id="hero"><div class="hero-copy"><div class="hero-eyebrow"><span class="live-dot"></span> OJ CYBERSECURITY LABORATORY <span class="eyebrow-sep">/</span> BUILD · INVESTIGATE · DEFEND</div>
+<h1 id="cipher" aria-live="polite">Defend what matters.</h1>
+<div class="dial"><label for="k">Decryption shift</label><input id="k" type="range" min="0" max="25" value="0" aria-describedby="cap"><output id="o">0</output></div>
+<p class="lede" id="cap">That scrambled line is a Caesar cipher, the oldest trick in secret writing. Turn the dial to read it. Build real security judgement through guided tutorials, safe simulations and hands-on investigations.</p>
+<a class="btn p" href="academy/index.html">Launch academy <span aria-hidden="true">↗</span></a><a class="btn s" href="academy/range.html">Enter live range</a>
+<div class="hero-stats" aria-label="Platform statistics"><div><strong>100</strong><span>ATTACK PATTERNS</span></div><div><strong>32</strong><span>CTF MISSIONS</span></div><div><strong>09</strong><span>ROLE SIMULATIONS</span></div></div>
+</div><div class="hero-console" aria-label="Preview of simulated security operations console"><div class="console-head"><span class="console-dots">● ● ●</span><span>OJ-SOC / INCIDENT MONITOR</span><span class="status">● LIVE SIM</span></div><div class="console-body"><div class="console-mini">DETECTION FEED <span>TRAINING ENVIRONMENT</span></div><div class="signal"><span class="signal-bar"></span><span class="signal-bar"></span><span class="signal-bar"></span><span class="signal-bar"></span><span class="signal-bar"></span><span class="signal-bar"></span><span class="signal-bar"></span><span class="signal-bar"></span><span class="signal-bar"></span><span class="signal-bar"></span><span class="signal-bar"></span><span class="signal-bar"></span></div><div class="console-event"><span class="event-time">02:14:01</span> <span class="event-alert">[ALERT]</span> SSH failures detected</div><div class="console-event"><span class="event-time">02:14:04</span> <span class="event-ok">[TRACE]</span> Source IP identified</div><div class="console-event"><span class="event-time">02:14:09</span> <span class="event-alert">[HIGH]</span> Suspicious authentication</div><div class="console-line">analyst@oj-soc:~$ <span class="type-cursor">grep "Failed" auth.log ▌</span></div><div class="console-result">203.0.113.45 — 4 failed attempts</div><div class="console-foot"><span>SIMULATED INCIDENT</span><span>CASE #OJ-4411</span></div></div></div></div></div>
+
+<section id="tracks"><div class="w">
+<h2>Seven careers, one foundation</h2>
+<p class="sub">Everyone starts with networks, Linux and security basics. Then pick the path that fits you. Open any role to see what it takes.</p>
+<div id="list"></div></div></section>
+
+<section id="method" style="background:var(--sf)"><div class="w">
+<h2>How you become job-ready</h2>
+<p class="sub">Reading is not enough. Each topic moves through the same three stages.</p>
+<div class="steps">
+<div><h3>Learn</h3><p>Clear tutorials with objectives, case studies, common mistakes and a knowledge check to close each lesson.</p></div>
+<div><h3>Practise</h3><p>Simulated labs: investigate an SSH attack in a terminal, triage a phishing email, hunt SQL injection in web logs, map attacks to MITRE ATT&amp;CK.</p></div>
+<div><h3>Prove</h3><p>Graded assessments and portfolio projects you can show to an employer.</p></div>
+</div></div></section>
+
+<section id="academy"><div class="w"><div class="band">
+<h2>Start with the lab, not the lecture</h2>
+<p>The NEXUS//SEC Academy now includes a 100-pattern defensive attack library, 32 CTF challenges, a live event-stream simulator for nine cyber roles, tutorials, practical labs, assessments and career tracks. It runs in your browser and saves your progress locally.</p>
+<a class="btn p" href="academy/index.html">Open the academy</a><a class="btn s" href="academy/attacks.html">Explore 100 attacks</a><a class="btn s" href="academy/range.html">Enter the live range</a>
+</div></div></section>
+
+<section style="padding-top:20px"><div class="w">
+<p class="pledge">We teach attack so you can defend. Every lab is simulated, and you only ever test what you own or have written permission to test.</p>
+</div></section>
+
+<footer><div class="w"><span>© 2026 OJ // NEXUS SEC Academy</span><span>Open source, MIT licence</span></div></footer>
+
+<script>
+const TR=[
+["SOC Analyst","Watch, triage, respond",["Core skills","Networking, Linux, Windows event logs, SIEM triage"],["Tools","Splunk, EDR, Wireshark, VirusTotal"],["Advanced","Threat hunting, detection engineering, SOAR automation"]],
+["Penetration Tester","Find weaknesses with permission",["Core skills","Web security, methodology, scoping, report writing"],["Tools","Nmap, Burp Suite, Metasploit in authorised labs"],["Advanced","Active Directory, API testing, purple teaming"]],
+["Forensics and Incident Response","Reconstruct what happened",["Core skills","Evidence handling, Windows and Linux internals, timelines"],["Tools","Autopsy, Volatility, KAPE"],["Advanced","Memory forensics, malware triage, cloud forensics"]],
+["Cloud Security","Protect identities and workloads",["Core skills","IAM, logging, storage security, shared responsibility"],["Tools","Terraform, Prowler, CSPM platforms"],["Advanced","Kubernetes hardening, KMS, policy as code"]],
+["Application Security","Build software that resists attack",["Core skills","OWASP Top 10, secure coding, code review"],["Tools","Semgrep, OWASP ZAP, Burp Suite"],["Advanced","Threat modelling, SAST, DAST and SCA pipelines"]],
+["Governance, Risk and Compliance","Make security measurable",["Core skills","ISO 27001, NIST CSF, risk registers, policies"],["Tools","Risk registers, audit evidence trackers"],["Advanced","Control mapping, third-party risk, POPIA and GDPR"]],
+["Security Architecture","Design systems that fail safely",["Core skills","Network and cloud design, identity, defence in depth"],["Tools","Diagramming and threat-modelling tools"],["Advanced","Zero trust, micro-segmentation, resilience design"]]];
+document.getElementById("list").innerHTML=TR.map(r=>`<details><summary><b>${r[0]}</b><span>${r[1]}</span></summary><div class="ex">${r.slice(2).map(x=>`<div><strong>${x[0]}</strong>${x[1]}</div>`).join("")}</div></details>`).join("");
+const MSG="Defend what matters.",K=7,h=document.getElementById("hero").parentNode,c=document.getElementById("cipher"),s=document.getElementById("k"),o=document.getElementById("o");
+function rot(ch,n){const b=ch>="a"&&ch<="z"?97:ch>="A"&&ch<="Z"?65:0;return b?String.fromCharCode((ch.charCodeAt(0)-b+n+26)%26+b):ch}
+function draw(d){o.textContent=d;s.value=d;c.setAttribute("aria-label",MSG);c.innerHTML=[...MSG].map(ch=>`<span class="${/[a-z]/i.test(ch)?"l":""}" aria-hidden="true">${ch==" "?"&nbsp;":rot(ch,(K-d+26)%26)}</span>`).join("");h.classList.toggle("solved",d==K)}
+s.oninput=()=>{clearInterval(t);draw(+s.value)};
+let t,i=0;draw(0);
+if(matchMedia("(prefers-reduced-motion:reduce)").matches){draw(K)}else{t=setInterval(()=>{i++;draw(i);if(i>=K)clearInterval(t)},320)}
+</script></body></html>

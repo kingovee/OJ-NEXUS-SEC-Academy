@@ -1,0 +1,15 @@
+{
+  "name": "oj-nexus-sec-academy",
+  "version": "2.0.0",
+  "private": false,
+  "description": "A browser-based cybersecurity academy with 100 defensive attack tutorials, 32 CTFs and nine live role simulations.",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node scripts/check-project.js && npm test",
+    "test": "node --test tests/*.test.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "MIT"
+}
