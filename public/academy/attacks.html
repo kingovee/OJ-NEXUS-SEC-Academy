@@ -7,8 +7,8 @@
 function academyLoadError(message){document.getElementById('main').innerHTML='<section class="card"><h1>Attack Library could not load</h1><p>The learning modules did not initialize. Refresh this page, or share the error message below.</p><pre id="load-error"></pre><button onclick="location.reload()">Retry</button> <a href="index.html">Academy dashboard</a></section>';document.getElementById('load-error').textContent=message}
 window.addEventListener('error',function(e){academyLoadError(String(e.message||'Script failed to load'))});
 </script>
-<script src="assets/app.js?v=2.3" onerror="academyLoadError('app.js failed to download')"></script>
-<script src="assets/expansion.js?v=2.3" onerror="academyLoadError('expansion.js failed to download')"></script>
+<script src="assets/app.js?v=2.4" onerror="academyLoadError('app.js failed to download')"></script>
+<script src="assets/expansion.js?v=2.4" onerror="academyLoadError('expansion.js failed to download')"></script>
 <script>
 try{if(typeof boot!=='function'||typeof V==='undefined'||typeof V.attacks!=='function')throw Error('Attack Library module is unavailable');boot('attacks');if(!document.querySelector('.attack-card'))throw Error('Attack cards did not render')}catch(e){academyLoadError(String(e.message||e))}
 </script>
