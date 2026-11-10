@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#071222"><title>Attack Library | OJ // NEXUS SEC Academy</title><link rel="icon" type="image/svg+xml" href="../assets/oj-mark.svg"><link rel="stylesheet" href="assets/style.css?v=2.3"></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#071222"><title>Attack Library | OJ // NEXUS SEC Academy</title><link rel="icon" type="image/svg+xml" href="../assets/oj-mark.svg"><link rel="stylesheet" href="assets/style.css?v=4.0"></head>
 <body>
 <nav id="nav" aria-label="Academy navigation"><a href="index.html">OJ // NEXUS SEC · Academy</a></nav>
 <aside style="padding:12px 20px;background:#102c35;border-bottom:1px solid #31645d"><a href="red-team.html" style="color:#66f1cf;font-weight:700">NEW: Red Team Practice Lab — Explore 100 authorized simulations →</a></aside><main id="main"><section class="card"><h1>Attack Library</h1><p>Explore 100 fictional cyberattack patterns and learn how defenders detect, respond to, and prevent them.</p><p id="load-status">Loading the interactive library…</p><p><a href="index.html">Back to academy</a> · <a href="range.html">Live Range</a></p></section></main>
@@ -10,7 +10,7 @@ window.addEventListener('error',function(e){academyLoadError(String(e.message||'
 <script src="assets/app.js?v=3.0" onerror="academyLoadError('app.js failed to download')"></script>
 <script src="assets/expansion.js?v=3.0" onerror="academyLoadError('expansion.js failed to download')"></script>
 <script src="assets/practice.js?v=3.0" onerror="academyLoadError('Practice module failed to download')"></script>
-<script src="assets/live-sim.js?v=3.1" onerror="academyLoadError('Live simulator failed to download')"></script>
+<script src="assets/live-sim.js?v=4.0" onerror="academyLoadError('Live simulator failed to download')"></script>
 <script>
 try{if(typeof boot!=='function'||typeof V==='undefined'||typeof V.attacks!=='function')throw Error('Attack Library module is unavailable');boot('attacks');if(!document.querySelector('.attack-card'))throw Error('Attack cards did not render')}catch(e){academyLoadError(String(e.message||e))}
 </script>
