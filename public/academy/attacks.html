@@ -10,6 +10,7 @@ window.addEventListener('error',function(e){academyLoadError(String(e.message||'
 <script src="assets/app.js?v=3.0" onerror="academyLoadError('app.js failed to download')"></script>
 <script src="assets/expansion.js?v=3.0" onerror="academyLoadError('expansion.js failed to download')"></script>
 <script src="assets/practice.js?v=3.0" onerror="academyLoadError('Practice module failed to download')"></script>
+<script src="assets/live-sim.js?v=3.1" onerror="academyLoadError('Live simulator failed to download')"></script>
 <script>
 try{if(typeof boot!=='function'||typeof V==='undefined'||typeof V.attacks!=='function')throw Error('Attack Library module is unavailable');boot('attacks');if(!document.querySelector('.attack-card'))throw Error('Attack cards did not render')}catch(e){academyLoadError(String(e.message||e))}
 </script>
