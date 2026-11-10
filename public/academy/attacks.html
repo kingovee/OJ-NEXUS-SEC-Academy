@@ -1,3 +1,15 @@
 <!doctype html>
-<html lang="en"><head><link rel="icon" type="image/svg+xml" href="../assets/oj-mark.svg"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Attack Library | OJ // NEXUS SEC Academy"><link rel="stylesheet" href="assets/style.css"></head>
-<body><nav id="nav"></nav><main id="main"></main><script src="assets/app.js"></script><script src="assets/expansion.js"></script><script>boot('attacks')</script></body></html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#071222"><title>Attack Library | OJ // NEXUS SEC Academy</title><link rel="icon" type="image/svg+xml" href="../assets/oj-mark.svg"><link rel="stylesheet" href="assets/style.css?v=2.3"></head>
+<body>
+<nav id="nav" aria-label="Academy navigation"><a href="index.html">OJ // NEXUS SEC · Academy</a></nav>
+<main id="main"><section class="card"><h1>Attack Library</h1><p>Explore 100 fictional cyberattack patterns and learn how defenders detect, respond to, and prevent them.</p><p id="load-status">Loading the interactive library…</p><p><a href="index.html">Back to academy</a> · <a href="range.html">Live Range</a></p></section></main>
+<script>
+function academyLoadError(message){document.getElementById('main').innerHTML='<section class="card"><h1>Attack Library could not load</h1><p>The learning modules did not initialize. Refresh this page, or share the error message below.</p><pre id="load-error"></pre><button onclick="location.reload()">Retry</button> <a href="index.html">Academy dashboard</a></section>';document.getElementById('load-error').textContent=message}
+window.addEventListener('error',function(e){academyLoadError(String(e.message||'Script failed to load'))});
+</script>
+<script src="assets/app.js?v=2.3" onerror="academyLoadError('app.js failed to download')"></script>
+<script src="assets/expansion.js?v=2.3" onerror="academyLoadError('expansion.js failed to download')"></script>
+<script>
+try{if(typeof boot!=='function'||typeof V==='undefined'||typeof V.attacks!=='function')throw Error('Attack Library module is unavailable');boot('attacks');if(!document.querySelector('.attack-card'))throw Error('Attack cards did not render')}catch(e){academyLoadError(String(e.message||e))}
+</script>
+</body></html>
