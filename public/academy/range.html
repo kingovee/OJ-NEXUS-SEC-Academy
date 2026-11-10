@@ -1,3 +1,38 @@
 <!doctype html>
-<html lang="en"><head><link rel="icon" type="image/svg+xml" href="../assets/oj-mark.svg"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Live Cyber Range | OJ // NEXUS SEC Academy"><link rel="stylesheet" href="assets/style.css"></head>
-<body><nav id="nav"></nav><main id="main"></main><script src="assets/app.js"></script><script src="assets/expansion.js"></script><script>boot('range')</script></body></html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#071222">
+<title>Live Cyber Range | OJ // NEXUS SEC Academy</title>
+<link rel="icon" type="image/svg+xml" href="../assets/oj-mark.svg">
+<link rel="stylesheet" href="assets/style.css?v=2.1">
+</head>
+<body>
+<nav id="nav" aria-label="Academy navigation"></nav>
+<main id="main">
+<section class="card"><h1>OJ // NEXUS SEC Live Range</h1><p>Loading your fictional security operations simulations…</p></section>
+</main>
+<script>
+window.addEventListener('error',function(e){
+  const main=document.getElementById('main');
+  if(!main)return;
+  if(main.querySelector('.range-role-grid') || main.querySelector('.range-workbench'))return;
+  const msg=e && e.message ? String(e.message) : 'A script could not load';
+  main.innerHTML='<section class="card"><h1>Live Range needs a refresh</h1><p>The training simulator could not initialize. Try reloading the page. If the problem persists, clear this site\'s cached data and try again.</p><p class="mu" id="range-error-detail"></p><button class="b" onclick="location.reload()">Reload simulator</button> <a href="index.html">Back to academy</a></section>';
+  document.getElementById('range-error-detail').textContent=msg;
+});
+</script>
+<script src="assets/app.js?v=2.1"></script>
+<script src="assets/expansion.js?v=2.1"></script>
+<script>
+try {
+  if(typeof boot!=='function'||typeof V==='undefined'||typeof V.range!=='function')throw Error('The range module did not finish loading');
+  boot('range');
+} catch(e) {
+  const main=document.getElementById('main');
+  main.innerHTML='<section class="card"><h1>Unable to start Live Range</h1><p>Refresh the page to reload the simulator. If this continues, please share the error below.</p><pre id="range-error-detail"></pre><button class="b" onclick="location.reload()">Try again</button> <a href="index.html">Back to academy</a></section>';
+  document.getElementById('range-error-detail').textContent=String(e && e.message||e);
+}
+</script>
+</body></html>
