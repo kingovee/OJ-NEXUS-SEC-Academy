@@ -237,3 +237,22 @@ input,textarea,select{max-width:100%}
 .oj-live-actions button{min-height:40px;white-space:normal}
 #oj-outcome{min-height:28px;color:#5ff5cc;font-weight:700}
 @media(max-width:800px){.oj-live-layout{grid-template-columns:1fr}.oj-live{padding:13px}.oj-live-metrics{gap:6px}.oj-live-metrics>div{padding:9px}.oj-live-metrics strong{font-size:20px}}
+
+/* Start Here interactive handbook and consistent back navigation */
+.oj-breadcrumb{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:0 0 18px;padding:10px 0;border-bottom:1px solid var(--bd)}
+.oj-breadcrumb button,.oj-breadcrumb a{font-size:12px;background:transparent;color:var(--ac);border:1px solid var(--bd);border-radius:8px;padding:8px 12px;cursor:pointer;text-decoration:none}
+.start-handbook{margin:36px 0 60px}
+.start-head{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin:18px 0}
+.start-head p{color:var(--mu);max-width:760px;line-height:1.65}
+.start-guide{display:grid;grid-template-columns:minmax(200px,290px) minmax(0,1fr);gap:16px}
+.start-chapters{display:flex;flex-direction:column;gap:5px;max-height:740px;overflow:auto;background:var(--cd);border:1px solid var(--bd);border-radius:12px;padding:10px}
+.start-chapters button{text-align:left;padding:11px;border-radius:8px;border:1px solid transparent;background:transparent;color:var(--tx);cursor:pointer;line-height:1.5}
+.start-chapters button:hover,.start-chapters button.active{background:rgba(66,245,197,.1);border-color:var(--ac)}
+.start-chapters small{display:block;color:var(--ac);font-size:10px}
+.start-lesson{background:var(--cd);border:1px solid var(--bd);border-radius:12px;padding:25px;min-height:420px;scroll-margin-top:90px}
+.start-lesson p{line-height:1.8}
+.start-lesson h3{margin-top:24px}
+.start-controls{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:28px;flex-wrap:wrap}
+.start-controls button{background:var(--sf);color:var(--tx);border:1px solid var(--bd);border-radius:8px;padding:10px 14px;cursor:pointer}
+.start-controls button:disabled{opacity:.35;cursor:default}
+@media(max-width:720px){.start-guide{grid-template-columns:1fr}.start-chapters{max-height:220px}.start-lesson{padding:16px}}
