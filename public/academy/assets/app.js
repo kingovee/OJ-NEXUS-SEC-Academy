@@ -149,7 +149,24 @@ function show(p,f){$("#nav").setAttribute("aria-label","Academy navigation");$("
 const PAGES={dash:'index.html',path:'start.html',acad:'curriculum.html',tut:'tutorials.html',lab:'labs.html',ctf:'ctf.html',quiz:'assessments.html',career:'career.html',tracks:'tracks.html',prog:'progress.html'};
 function go(p){location.href=PAGES[p]}
 let PEND=()=>{};
-function boot(p,fn){PEND=()=>{show(p,fn?()=>'':null);if(fn)fn()};PEND()}
+function boot(p,fn){
+  PEND=()=>{
+    try {
+      if(typeof V[p]!=='function'&&!fn)throw Error('Page renderer not found: '+p);
+      show(p,fn?()=>'':null);
+      if(fn)fn();
+      if(!document.getElementById('main').textContent.trim())throw Error('Page rendered no visible content');
+    } catch(err) {
+      const main=document.getElementById('main');
+      if(main) {
+        main.innerHTML='<section class="card"><h1>Unable to open this section</h1><p>The academy encountered a loading error. Please refresh the page or return to the dashboard.</p><pre id="oj-page-error" style="white-space:pre-wrap;overflow-wrap:anywhere"></pre><p><button class="b" onclick="location.reload()">Reload page</button> <a href="index.html">Dashboard</a></p></section>';
+        document.getElementById('oj-page-error').textContent=String(err&&err.message||err);
+      }
+      console.error('OJ Academy page error',err);
+    }
+  };
+  PEND();
+}
 const qid=()=>new URLSearchParams(location.search).get('id');
 const L={};
 const V={
