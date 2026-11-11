@@ -1,6 +1,5 @@
-/* Fill in your own Supabase project values to enable student accounts.
-   Only a PUBLIC publishable/anon key belongs here; NEVER a service_role key. */
+/* Supabase browser configuration: project URL and PUBLIC publishable key only. */
 window.OJ_BACKEND_CONFIG={
- url:"",
- publishableKey:""
+ url:"https://petiuwnwacnrgmmwabpe.supabase.co",
+ publishableKey:"sb_publishable_uSXrWjS3hezWQBsyYm5IdQ_eENIPqDK"
 };
