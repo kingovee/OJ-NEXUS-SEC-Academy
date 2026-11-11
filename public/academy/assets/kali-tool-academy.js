@@ -31,7 +31,7 @@ const outputs={
 'grep FIX reports/zap-passive.txt':'FIX=Use CSP frame-ancestors for modern frame embedding restrictions',
 'capinfos captures/campus-demo.pcap':'File type: Wireshark/tcpdump/... - pcap\nNumber of packets: 4\nFile size: synthetic training sample',
 'tshark -r captures/campus-demo.pcap -Y dns':'1 192.0.2.25 -> 198.51.100.53 DNS Standard query A campus.test\n2 198.51.100.53 -> 192.0.2.25 DNS Standard response A 198.51.100.20',
-'tshark -r captures/campus-demo.pcap -Y http':'4 127.0.0.1 -> 127.0.0.1 HTTP GET /training HTTP/1.1',
+'tshark -r captures/campus-demo.pcap -d tcp.port==8766,http -Y http':'4 127.0.0.1 -> 127.0.0.1 HTTP GET /training HTTP/1.1',
 'tshark -r captures/campus-demo.pcap -Y tcp':'3 127.0.0.1 -> 127.0.0.1 TCP Src Port: 55321 Dst Port: 8766\n4 127.0.0.1 -> 127.0.0.1 TCP 55321 -> 8766 HTTP GET',
 'tcpdump -nn -r captures/campus-demo.pcap':'09:00 IP 192.0.2.25.53100 > 198.51.100.53.53: DNS query A campus.test\n09:00 IP 198.51.100.53.53 > 192.0.2.25.53100: DNS response A 198.51.100.20\n09:01 IP 127.0.0.1.55321 > 127.0.0.1.8766: TCP SYN\n09:01 IP 127.0.0.1.55321 > 127.0.0.1.8766: HTTP GET /training',
 'cat evidence/conn.log':'ts=09:01 id.orig_h=127.0.0.1 id.resp_h=127.0.0.1 id.resp_p=8766 service=http\n',
