@@ -1,1 +1,27 @@
 body{background:#071827;color:#e1f0f7}.studio-head{padding:16px 22px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;background:#0d2938;border-bottom:1px solid #365b69}.studio-head a{color:#80e8c7;text-decoration:none;font-weight:700}.studio-head nav{display:flex;gap:16px;flex-wrap:wrap;font-size:13px}.studio-wrap{max-width:1280px;margin:auto;padding:22px}.studio-intro p{max-width:850px;line-height:1.7;color:#b9d1df}.studio-tag{font-size:11px;letter-spacing:.1em;color:#72ebca}.studio-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:25px 0}.studio-tabs button,.studio-btn{background:#173849;color:#e3f5fa;border:1px solid #477987;border-radius:8px;padding:11px 14px;cursor:pointer}.studio-tabs button.active,.studio-btn:hover{background:#24695f;border-color:#70e8be}.studio-panel{background:#102c3c;border:1px solid #33596a;border-radius:14px;padding:22px;margin-bottom:22px}.studio-panel h2{margin-top:0}.studio-panel p{line-height:1.75}.studio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:13px}.studio-card{background:#16384b;border:1px solid #385f70;padding:16px;border-radius:10px}.studio-card p{color:#c5d8e4}.studio-input,.studio-select,.studio-area{width:100%;padding:12px;background:#071d2a;border:1px solid #527587;border-radius:8px;color:#e6f5fa;margin:7px 0 12px;box-sizing:border-box}.studio-area{min-height:120px;font-family:monospace}.studio-console{background:#04121b;border:1px solid #2c5562;color:#a2f5ce;border-radius:10px;padding:18px;white-space:pre-wrap;font:13px/1.65 monospace;min-height:110px;overflow:auto}.studio-actions{display:flex;flex-wrap:wrap;gap:9px;margin:12px 0}.studio-feedback{padding:12px;border-left:3px solid #75e6c6;background:#123b42;margin-top:12px}.studio-table{width:100%;border-collapse:collapse;display:block;overflow:auto}.studio-table th,.studio-table td{padding:10px;border-bottom:1px solid #38586a;text-align:left;white-space:nowrap}.studio-diagram{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:20px;background:#071d2a;border-radius:10px}.studio-node{padding:14px;border:1px solid #62cdb8;border-radius:10px;min-width:110px;text-align:center}.studio-node small{display:block;color:#b6d1df}.studio-refs a{color:#7be7ce}.studio-metric{font-size:25px;font-weight:800;color:#7be7ce}.studio-muted{color:#b8cfda;font-size:13px}@media(max-width:650px){.studio-wrap{padding:12px}.studio-panel{padding:15px}.studio-head{padding:12px}}
+/* Student account: simple, responsive and keyboard-friendly */
+#academy-account{max-width:760px}
+#academy-account h2{margin:0 0 6px;font-size:1.4rem}
+#academy-account p{margin:6px 0 12px}
+.account-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.account-switch{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:18px 0}
+.account-switch button,.account-secondary,.account-primary,.account-link{font:inherit;cursor:pointer}
+.account-switch button{padding:12px;border-radius:9px;border:1px solid #527587;background:#0a2231;color:#d7eaf3}
+.account-switch button.selected{background:#216d60;border-color:#78edc9;color:#fff;font-weight:700}
+.account-form{display:grid;gap:9px;max-width:520px}
+.account-form label{font-size:14px;font-weight:700}
+.account-form input{box-sizing:border-box;width:100%;min-height:46px;padding:11px 13px;border:1px solid #6b93a2;border-radius:9px;background:#071d2a;color:#fff;font:inherit}
+.account-form input:focus-visible,#academy-account button:focus-visible{outline:3px solid #8af4d2;outline-offset:2px}
+.account-password{position:relative}
+.account-password input{padding-right:85px}
+.account-password button{position:absolute;right:7px;top:7px;padding:7px 10px;background:#173849;border:1px solid #527587;border-radius:6px;color:#e3f5fa}
+.account-primary{min-height:46px;padding:11px 18px;background:#247c68;border:1px solid #7fe3c6;border-radius:9px;color:#fff;font-weight:800}
+.account-secondary{min-height:44px;padding:10px 15px;background:#183d4e;border:1px solid #6b93a2;border-radius:9px;color:#fff}
+.account-links{margin-top:10px}
+.account-link{border:0;background:none;padding:7px 0;color:#8ff3d2;text-decoration:underline}
+.account-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.account-online{color:#8ff3d2;font-size:13px}
+.account-hint{font-size:13px;color:#c0d6e1}
+.account-message{min-height:20px;font-size:14px;color:#a7f4d8}
+.account-error{color:#ffb8b8}
+#academy-account button:disabled{opacity:.6;cursor:wait}
