@@ -1,5 +1,5 @@
 
-const NAV=[["dash","Dashboard"],["path","Start Here"],["textbook","Textbook"],["acad","Academy"],["tut","Tutorials"],["lab","Labs"],["ctf","CTF"],["quiz","Assessments"],["career","Career Centre"],["tracks","Role Tracks"],["prog","My Progress"]];
+const NAV=[["dash","Dashboard"],["path","Start Here"],["textbook","Textbook"],["studio","Cyber Range Studio"],["acad","Academy"],["tut","Tutorials"],["lab","Labs"],["ctf","CTF"],["quiz","Assessments"],["career","Career Centre"],["tracks","Role Tracks"],["prog","My Progress"]];
 let S={done:{},quiz:0};
 try{S=Object.assign(S,JSON.parse(localStorage.getItem("cyac")||"{}"))}catch(e){}
 // Public beta: local-only guest progress; no authentication or student database.
@@ -146,7 +146,7 @@ function pct(){const all=TUTS.length+LABS.length+CTF.length+1;return Math.round(
 function toggleTheme(){const dark=document.documentElement.dataset.theme!=='dark';document.documentElement.dataset.theme=dark?'dark':'light';try{localStorage.setItem('nexus-theme',dark?'dark':'light')}catch(e){}}
 try{document.documentElement.dataset.theme=localStorage.getItem('nexus-theme')||'dark'}catch(e){document.documentElement.dataset.theme='dark'}
 function show(p,f){$("#nav").setAttribute("aria-label","Academy navigation");$("#nav").innerHTML="<a href=../index.html class=home><img src=../assets/oj-mark.svg alt=OJ width=26 height=26> OJ // NEXUS</a>"+NAV.map(n=>`<button class="${n[0]==p?"on":""}" onclick="go('${n[0]}')">${n[1]}</button>`).join("")+`<button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">◐ Theme</button>`+(ME?`<span class='mu' style='margin-left:auto;padding:6px 10px;white-space:nowrap'>${esc(ME)}${ADMIN?' (admin)':''}</span>`:'');$("#main").innerHTML=f?f():V[p]();if(!f&&L[p])L[p]();const back=document.createElement('div');back.className='oj-breadcrumb';back.innerHTML='<button type="button" id="oj-back-button">← Previous page</button> <a href="start.html">Start Here</a> <a href="index.html">Dashboard</a>';$("#main").prepend(back);document.getElementById('oj-back-button').onclick=()=>{if(history.length>1)history.back();else location.href='start.html'};scrollTo(0,0)}
-const PAGES={dash:'index.html',path:'start.html',textbook:'textbook.html',acad:'curriculum.html',tut:'tutorials.html',lab:'labs.html',ctf:'ctf.html',quiz:'assessments.html',career:'career.html',tracks:'tracks.html',prog:'progress.html'};
+const PAGES={dash:'index.html',path:'start.html',textbook:'textbook.html',studio:'cyber-studio.html',acad:'curriculum.html',tut:'tutorials.html',lab:'labs.html',ctf:'ctf.html',quiz:'assessments.html',career:'career.html',tracks:'tracks.html',prog:'progress.html'};
 function go(p){location.href=PAGES[p]}
 let PEND=()=>{};
 function boot(p,fn){
