@@ -43,13 +43,13 @@ else msg('Signed in successfully.');
 }catch(error){msg(friendlyError(error),true)}finally{setBusy(false)}
 }
 async function sync(){if(!user||busy)return;setBusy(true);msg('Saving your progress…');try{
-const raw=localStorage.getItem('oj-studio-progress');const local=raw?JSON.parse(raw):{completed:{},cases:[],scores:[]};
+const ownerKey='oj-studio-progress-owner';const existingOwner=localStorage.getItem(ownerKey);if(existingOwner&&existingOwner!==user.id){msg('This device has training progress associated with a different account. To protect privacy, cloud sync was stopped. Use a separate browser profile for each student.',true);return}if(!existingOwner){const approved=window.confirm('This device may contain progress from someone else. Import its local progress into your account? Only continue if the progress is yours.');if(!approved){msg('Sync cancelled. No progress was uploaded.');return}}const raw=localStorage.getItem('oj-studio-progress');const local=raw?JSON.parse(raw):{completed:{},cases:[],scores:[]};
 const {data,error}=await client.from('student_progress').select('progress').eq('user_id',user.id).maybeSingle();if(error)throw error;
 const remote=data?.progress||{completed:{},cases:[],scores:[]};
 const unique=a=>[...new Map(a.map(x=>[JSON.stringify(x),x])).values()].slice(-100);
 const merged={completed:{...(remote.completed||{}),...(local.completed||{})},cases:unique([...(remote.cases||[]),...(local.cases||[])]),scores:unique([...(remote.scores||[]),...(local.scores||[])])};
 const saved=await client.from('student_progress').upsert({user_id:user.id,progress:merged,updated_at:new Date().toISOString()},{onConflict:'user_id'});if(saved.error)throw saved.error;
-localStorage.setItem('oj-studio-progress',JSON.stringify(merged));msg('Progress saved. Reload the studio to see progress brought in from another device.');
+localStorage.setItem('oj-studio-progress',JSON.stringify(merged));localStorage.setItem(ownerKey,user.id);msg('Progress saved. Reload the studio to see progress brought in from another device.');
 }catch(error){msg('Could not save progress: '+error.message,true)}finally{setBusy(false)}
 }
 client.auth.onAuthStateChange((event,session)=>{user=session?.user||null;if(event==='PASSWORD_RECOVERY'){mode='recovery';notice='';}else if(event==='SIGNED_OUT'){mode='signin';notice='';}render()});
