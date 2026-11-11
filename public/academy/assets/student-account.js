@@ -9,6 +9,7 @@ const client=window.supabase.createClient(cfg.url,cfg.publishableKey,{auth:{pers
 const redirect=new URL('cyber-studio.html',location.href).href;
 let user=null,mode='signin',busy=false,notice='',noticeError=false;
 const button=(id,label)=>'<button type="button" id="'+id+'" class="account-link">'+label+'</button>';
+function friendlyError(error){const code=String(error?.code||'').toLowerCase(),message=String(error?.message||'');if(code==='over_email_send_rate_limit'||/email rate limit exceeded/i.test(message))return 'Too many confirmation emails have been requested. Please wait before trying again, and check your inbox for an earlier email. If this continues, contact the academy administrator.';if(code==='invalid_credentials')return 'Email or password is incorrect, or your email is not confirmed. Check your details and confirmation email.';return message||'Please try again.'}
 function msg(value,error=false){notice=value;noticeError=error;const el=document.getElementById('account-message');if(el){el.textContent=value;el.className='account-message'+(error?' account-error':'');el.setAttribute('role',error?'alert':'status')}}
 function setBusy(value){busy=value;root.querySelectorAll('button,input').forEach(x=>{if(x.id!=='account-show')x.disabled=value})}
 function render(){
@@ -39,7 +40,7 @@ if(current==='register')msg(result.data?.session?'Account created. You are signe
 else if(current==='reset')msg('If an account exists for this email, a reset link will arrive shortly.');
 else if(current==='recovery'){mode='signin';msg('Password updated. You can now sign in.');render()}
 else msg('Signed in successfully.');
-}catch(error){msg(error.message||'Please try again.',true)}finally{setBusy(false)}
+}catch(error){msg(friendlyError(error),true)}finally{setBusy(false)}
 }
 async function sync(){if(!user||busy)return;setBusy(true);msg('Saving your progress…');try{
 const raw=localStorage.getItem('oj-studio-progress');const local=raw?JSON.parse(raw):{completed:{},cases:[],scores:[]};
