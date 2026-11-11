@@ -115,6 +115,20 @@ consent=not-required-fabricated
 share=aggregated-only
 geolocation=redacted
 OJ_LAB_FILE_15
+cat > "$ROOT/records/processes.txt" <<'OJ_LAB_EXTRA_PROCESSES'
+USER PID COMMAND
+root 1 init
+student 208 terminal
+monitor 432 logwatch
+OJ_LAB_EXTRA_PROCESSES
+cat > "$ROOT/records/listening-ports.txt" <<'OJ_LAB_EXTRA_PORTS'
+Netid State Local Address:Port
+tcp LISTEN 127.0.0.1:8080
+tcp LISTEN 127.0.0.1:3000
+OJ_LAB_EXTRA_PORTS
+cat > "$ROOT/records/interface.txt" <<'OJ_LAB_EXTRA_INTERFACE'
+training0 inet 192.0.2.25/24 scope global
+OJ_LAB_EXTRA_INTERFACE
 echo "Training data created: $ROOT"
 echo 'Next: cd oj-nexus-linux-osint-lab'
 echo 'Try: pwd; ls -la; cat README.txt; grep FAILED evidence/auth.log'
