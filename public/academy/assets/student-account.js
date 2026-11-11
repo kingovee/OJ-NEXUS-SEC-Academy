@@ -1,0 +1,20 @@
+/* Supabase Auth + per-user RLS-backed progress sync. Works only after owner configures Supabase. */
+(()=>{'use strict';
+const cfg=window.OJ_BACKEND_CONFIG||{},root=document.getElementById('academy-account');
+if(!root)return;
+const esc=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[c]));
+const enabled=/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(cfg.url)&&!!cfg.publishableKey;
+if(!enabled){root.innerHTML='<strong>Student cloud accounts:</strong> awaiting academy administrator setup. The training studio remains available offline, with progress saved only on this device.';return}
+if(!window.supabase?.createClient){root.textContent='Account service could not load. Local training remains available.';return}
+const client=window.supabase.createClient(cfg.url,cfg.publishableKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+let user=null;
+function ui(){root.innerHTML=user?'<strong>Signed in:</strong> '+esc(user.email||'Student')+' <button id="account-sync">Sync progress</button> <button id="account-logout">Sign out</button><small id="account-message"></small>':'<strong>Student account</strong><p>Use your own email. A confirmation email may be required. Do not share passwords.</p><form id="account-form"><input type="email" id="account-email" autocomplete="email" required placeholder="Email"><input type="password" id="account-password" autocomplete="current-password" minlength="10" required placeholder="Password (10+ characters)"><button type="submit" value="signin">Sign in</button><button type="button" id="account-register">Create account</button></form><small id="account-message"></small>';
+if(user){document.getElementById('account-sync').onclick=sync;document.getElementById('account-logout').onclick=async()=>{await client.auth.signOut()}}else{
+const form=document.getElementById('account-form');form.onsubmit=e=>{e.preventDefault();login(false)};document.getElementById('account-register').onclick=()=>login(true)}
+}
+function message(v){const x=document.getElementById('account-message');if(x)x.textContent=v}
+async function login(register){const email=document.getElementById('account-email').value.trim(),password=document.getElementById('account-password').value;message('Working…');try{const result=register?await client.auth.signUp({email,password}):await client.auth.signInWithPassword({email,password});if(result.error)throw result.error;message(register?'Check your email for confirmation if required.':'Signed in.')}catch(e){message('Account request failed: '+e.message)}}
+async function sync(){if(!user)return;message('Syncing…');try{const raw=localStorage.getItem('oj-studio-progress');const local=raw?JSON.parse(raw):{completed:{},cases:[],scores:[]};const {data,error}=await client.from('student_progress').select('progress').eq('user_id',user.id).maybeSingle();if(error)throw error;const remote=data?.progress||{completed:{},cases:[],scores:[]};const merged={completed:{...(remote.completed||{}),...(local.completed||{})},cases:[...(remote.cases||[]),...(local.cases||[])],scores:[...(remote.scores||[]),...(local.scores||[])]};merged.cases=[...new Map(merged.cases.map(x=>[JSON.stringify(x),x])).values()].slice(-100);merged.scores=[...new Map(merged.scores.map(x=>[JSON.stringify(x),x])).values()].slice(-100);const result=await client.from('student_progress').upsert({user_id:user.id,progress:merged,updated_at:new Date().toISOString()},{onConflict:'user_id'});if(result.error)throw result.error;localStorage.setItem('oj-studio-progress',JSON.stringify(merged));message('Synced successfully. Reload to display merged progress.')}catch(e){message('Sync failed: '+e.message)}}
+client.auth.onAuthStateChange((_event,session)=>{user=session?.user||null;ui()});
+client.auth.getSession().then(({data})=>{user=data.session?.user||null;ui()}).catch(()=>{root.textContent='Account connection unavailable; local training still works.'});
+})();
