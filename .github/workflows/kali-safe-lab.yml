@@ -1,0 +1,69 @@
+name: OJ Kali Safe Lab Validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'public/academy/assets/kali-safe-lab.py'
+      - 'public/academy/assets/kali-tool-*.js'
+      - 'public/academy/kali-tools.html'
+      - '.github/workflows/kali-safe-lab.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-local-lab:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check Python syntax
+        run: python3 -m py_compile public/academy/assets/kali-safe-lab.py
+      - name: Check browser JavaScript syntax
+        run: |
+          node --check public/academy/assets/kali-tool-data.js
+          node --check public/academy/assets/kali-tool-academy.js
+      - name: Generate offline practice fixtures and test localhost service
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/kali-lab-test"
+          cd "$RUNNER_TEMP/kali-lab-test"
+          python3 "$GITHUB_WORKSPACE/public/academy/assets/kali-safe-lab.py" --setup
+          cd oj-kali-safe-lab
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          import struct
+          b = Path('captures/campus-demo.pcap').read_bytes()
+          assert b[:4] == bytes.fromhex('d4c3b2a1')
+          cursor, count = 24, 0
+          while cursor < len(b):
+              _, _, captured, original = struct.unpack_from('<IIII', b, cursor)
+              assert captured == original
+              cursor += 16 + captured
+              assert cursor <= len(b)
+              count += 1
+          assert cursor == len(b) and count == 4
+          text = Path('evidence/notice.txt').read_bytes()
+          assert hashlib.sha256(text).hexdigest().startswith('725713c8')
+          assert Path('reports/findings.csv').exists()
+          print('PCAP, checksum and evidence fixtures passed')
+          PY
+          python3 serve.py > server-test.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          for n in 1 2 3 4 5 6 7 8 9 10; do
+            if curl --silent --fail --output /dev/null 'http://127.0.0.1:8766/'; then break; fi
+            sleep 0.3
+          done
+          test "$(curl --silent --output /dev/null --write-out '%{http_code}' 'http://127.0.0.1:8766/api/profile/17')" = '200'
+          test "$(curl --silent --output /dev/null --write-out '%{http_code}' 'http://127.0.0.1:8766/api/private')" = '403'
+          curl --fail --silent --head 'http://127.0.0.1:8766/' | grep -i 'Content-Security-Policy'
+          echo 'Local HTTP service smoke test passed'
